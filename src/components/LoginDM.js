@@ -1,20 +1,26 @@
-import { LitElement } from "lit";
+import { LitElement, html } from "lit";
 import { Mixin } from "./Mixin";
+import { CLIENTS } from "../model";
 
 export class LoginDataManager extends Mixin(LitElement) {
   static get properties() {
     return {
       users: { type: Object },
+      error: { type: Boolean },
     };
   }
 
   constructor() {
     super();
     this.users = {};
+    this.error = false;
   }
 
   login(customer) {
-    if (customer.user == "antonio" && customer.password == "123") {
+    if (
+      customer.user == CLIENTS[0].userName &&
+      customer.password == CLIENTS[0].password
+    ) {
       this._requestUsers()
         .then((response) => {
           this.users = {
@@ -24,12 +30,13 @@ export class LoginDataManager extends Mixin(LitElement) {
           this._fireEvent("login-success", this.users);
         })
         .catch((error) => {
+          this.error = true;
           this._fireEvent("login-fail", error);
         });
     } else {
       let error = {
         code: -1,
-        message: "Authentication Failed",
+        message: "Autenticación fallida",
       };
       this._fireEvent("login-fail", error);
     }

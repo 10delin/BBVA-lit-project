@@ -5,6 +5,8 @@ export class Home extends LitElement {
     return {
       isLoginSuccess: { type: Boolean },
       users: { type: Array },
+      error: { type: Boolean },
+      message: { type: String },
     };
   }
 
@@ -12,6 +14,8 @@ export class Home extends LitElement {
     super();
     this.isLoginSuccess = false;
     this.users = [];
+    this.error = false;
+    this.message = "";
   }
 
   render() {
@@ -35,7 +39,9 @@ export class Home extends LitElement {
         @login-fail=${this._handleLoginError}
       >
       </login-dm>
-      <dbt-alert id="alert"></dbt-alert>
+      ${this.error
+        ? html`<error-popup message=${this.message}></error-popup>`
+        : null}
     `;
   }
 
@@ -50,7 +56,8 @@ export class Home extends LitElement {
   }
 
   _handleLoginError(event) {
-    console.log(`Login Fail ${event.detail.message}`);
+    this.message = event.detail.message;
+    if (event.detail.code == -1) return (this.error = true);
   }
 }
 
