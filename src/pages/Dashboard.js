@@ -39,7 +39,17 @@ class Dashboard extends LitElement {
                 imageSrc=${user.picture.large}
                 firstName=${user.name.first}
                 lastName=${user.name.last}
-                description=${user.email}
+                username=${user.login.username}
+                gender=${user.gender}
+                phone=${user.phone}
+                email=${user.email}
+                city=${user.location.city}
+                state=${user.location.state}
+                country=${user.location.country}
+                postcode=${user.location.postcode}
+                street=${user.location.street.name}
+                number=${user.location.street.number}
+                timezone=${user.location.timezone.offset}
               ></presentation-card>
             `
         )}

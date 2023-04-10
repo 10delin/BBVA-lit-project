@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement } from "lit";
 import { Mixin } from "./Mixin";
 import { CLIENTS } from "../model";
 

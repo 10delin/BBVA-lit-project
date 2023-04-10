@@ -41,11 +41,12 @@ class TitleCard extends LitElement {
   }
 
   render() {
-    return html` <div class="title-card">
+    return html`
+      <div class="title-card">
         <h1 class="title-card__title">${this.title}</h1>
         <p class="title-card__description">${this.description}</p>
       </div>
-      ;`;
+    `;
   }
 }
 

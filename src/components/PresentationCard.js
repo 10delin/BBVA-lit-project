@@ -4,7 +4,7 @@ class PresentationCard extends LitElement {
   static get styles() {
     return css`
       .card {
-        display: inline-block;
+        display: inline-grid;
         margin: 15px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -47,8 +47,19 @@ class PresentationCard extends LitElement {
       imageSrc: { type: String },
       firstName: { type: String },
       lastName: { type: String },
-      description: { type: String },
+      username: { type: String },
+      gender: { type: String },
+      phone: { type: String },
+      email: { type: String },
+      city: { type: String },
+      state: { type: String },
+      country: { type: String },
+      postcode: { type: String },
+      street: { type: String },
+      number: { type: String },
+      timezone: { type: String },
       isDisabled: { type: Boolean },
+      showMore: { type: Boolean },
     };
   }
 
@@ -57,8 +68,19 @@ class PresentationCard extends LitElement {
     this.imageSrc = "";
     this.firstName = "";
     this.lastName = "";
-    this.description = "";
+    this.username = "";
+    this.gender = "";
+    this.phone = "";
+    this.email = "";
+    this.city = "";
+    this.state = "";
+    this.country = "";
+    this.postcode = "";
+    this.street = "";
+    this.number = "";
+    this.timezone = "";
     this.isDisabled = false;
+    this.showMore = false;
   }
 
   render() {
@@ -66,12 +88,31 @@ class PresentationCard extends LitElement {
       <div class="card">
         <img class="image" src="${this.imageSrc}" />
         <h2 class="title">${this.firstName} ${this.lastName}</h2>
-        <p class="description">${this.description}</p>
-        <button-component ?isDisabled=${this.isDisabled}
-          >Saber mas</button-component
+        <p class="description">Username: ${this.username}</p>
+        ${this.showMore
+          ? html`
+              <p>Gender: ${this.gender}</p>
+              <p>Phone: ${this.phone}</p>
+              <p>Email: ${this.email}</p>
+              <p>City: ${this.city}</p>
+              <p>State: ${this.state}</p>
+              <p>Country: ${this.country}</p>
+              <p>Postcode: ${this.postcode}</p>
+              <p>Street: ${this.street}</p>
+              <p>Number: ${this.number}</p>
+              <p>Timezone: ${this.timezone}</p>
+            `
+          : null}
+        <button-component
+          ?isDisabled=${this.isDisabled}
+          @click=${this._showMore}
+          >${this.showMore ? "Mostrar menos" : "Mostrar mas"}</button-component
         >
       </div>
     `;
+  }
+  _showMore() {
+    this.showMore = !this.showMore;
   }
 }
 
